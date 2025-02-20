@@ -88,7 +88,7 @@ else{
   $query->bindParam(":phone", $phone, PDO::PARAM_STR);
   $query->bindParam(":message", $message, PDO::PARAM_STR);
   $result = $query->execute();
-  mail('meekasel@gmail.com', 'Сообщение с формы', "Сообщение: $message", $headers);
+  mail('kudruavcev@aisol.ru', 'Сообщение с формы', "Сообщение: $message", $headers);
   header('Location: index.php');
 }
 }
