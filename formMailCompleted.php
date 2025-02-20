@@ -68,7 +68,7 @@ function BackEndValidationFeedbackForm($data_name, $data_email, $data_phone, $da
   $name = $_POST['name'];
   $email = $_POST['email'];
   $phone = $_POST['phone'];
-  $message = htmlspecialchars($_POST['message'], ENT_QUOTES);
+  $message = $_POST['message'];
   $headers = "From: $email\r\nContent-type:text/plain; charset=utf-8\r\n";
   $query = $connection->prepare("SELECT * FROM all_feedbacks WHERE email=:email");
   $query->bindParam(":email", $email, PDO::PARAM_STR);
