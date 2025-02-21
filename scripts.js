@@ -28,9 +28,6 @@ function NameValidation(e) {
   });
 
 }
-
-
-
 function EmailValidation(e) {
 
   if (!e.key.match(/^(?!.*\.{2,}.*$)[a-z0-9.@]+$/)) {
@@ -57,16 +54,9 @@ function PhoneValidation(e) {
   });
 }
 
-function MessageValidation(e) {
-
-  if (!e.key.match(/^(?!.*\.{2,}.*$)[A-Za-zА-яЁё0-9.,!?]+$/)) {
-    e.preventDefault();
-  }
-  document.getElementById('messageForm').addEventListener('textarea', function () {
-    var maxLength = 15;
-    if (this.value.length > maxLength) {
-      this.value = this.value.substring(0, maxLength);
-    }
-  });
-
+function MessageValidation(e){
+  var position = 'selectionStart' in this ?
+    this.selectionStart :
+     Math.abs(document.selection.createRange().moveStart('character', -input.value.length)); //ie<9
+  if(e.keyCode === 32 && position === 0) return false
 }

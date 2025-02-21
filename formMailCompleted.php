@@ -34,32 +34,18 @@ function BackEndValidationPhone($data){
     return 0;
 }
 
-function BackEndValidationMessage($data){
-  $err ="";
-  if(strlen($data)<1 || strlen($data)>255)
-    $err = "Сообщение должно состоять от 1 до 255 символов";
-  if (!preg_match("/^(?!.*\.{2,}.*$)[A-Za-zА-яЁё0-9.,!?]+$/",$data))
-    $err = $err . "Попытка отправки пробела(пустой строки) / недопустимых символов"; 
-  if(!empty($err))
-    return($err);
-else
-    return 0;
-}
 
-function BackEndValidationFeedbackForm($data_name, $data_email, $data_phone, $data_message){
+function BackEndValidationFeedbackForm($data_name, $data_email, $data_phone){
   $err="";
   $err_name = BackEndValidationName($data_name);
   $err_email = BackEndValidationEmail($data_email);
   $err_phone = BackEndValidationPhone($data_phone);
-  $err_message = BackEndValidationMessage($data_message);
   if(!empty($err_name))
     $err = $err_name;
   if(!empty($err_email))
     $err = $err . $err_email;
   if(!empty($err_phone))
     $err = $err . $err_phone;
-  if(!empty($err_message))
-    $err = $err . $err_message;
   return $err;
 }
 
@@ -68,7 +54,7 @@ function BackEndValidationFeedbackForm($data_name, $data_email, $data_phone, $da
   $name = $_POST['name'];
   $email = $_POST['email'];
   $phone = $_POST['phone'];
-  $message = $_POST['message'];
+  $message = htmlspecialchars($_POST['message'], ENT_QUOTES);
   $headers = "From: $email\r\nContent-type:text/plain; charset=utf-8\r\n";
   $query = $connection->prepare("SELECT * FROM all_feedbacks WHERE email=:email");
   $query->bindParam(":email", $email, PDO::PARAM_STR);
@@ -88,7 +74,7 @@ else{
   $query->bindParam(":phone", $phone, PDO::PARAM_STR);
   $query->bindParam(":message", $message, PDO::PARAM_STR);
   $result = $query->execute();
-  mail('kudruavcev@aisol.ru', 'Сообщение с формы', "Сообщение: $message", $headers);
+  mail('kudruavcev@asiol.ru', 'Сообщение с формы', "Сообщение: $message", $headers);
   header('Location: index.php');
 }
 }

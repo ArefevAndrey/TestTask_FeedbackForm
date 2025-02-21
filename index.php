@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +18,7 @@
   <span>Номер телефона:</span>
   <input type="text" class="check-label" name="phone" maxLength="12" id="numberForm"  placeholder="88005553535" onkeypress="return PhoneValidation(event)" required />
   <span>Сообщение:</span>
-  <textarea rows="10" cols="45" class="check-label" name="message" id="messageForm" maxLength="255" onkeypress="return MessageValidation(event)" required></textarea><br>
+  <textarea rows="10" cols="45" class="check-label" name="message" id="messageForm" maxLength="255" onkeydown="return MessageValidation.call(this,event)" required></textarea><br>
   <input type="submit" id="emailCheckResult" class="check-label" name="formSubmit" value="Отправить сообщение">
   </fieldset>
   </form>
