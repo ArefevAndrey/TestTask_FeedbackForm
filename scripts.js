@@ -1,7 +1,7 @@
 var request = new XMLHttpRequest();
 
 function liveEmailCheckInit() {
-   var emailInput = document.getElementById("emailInput");
+   var emailInput = document.getElementById("emailForm");
    request.onreadystatechange = function() {
        if (this.readyState == 4 && this.status == 200) {
         document.getElementById("emailCheckResult").style.display = this.responseText
